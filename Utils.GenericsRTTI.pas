@@ -19,23 +19,18 @@ uses
 
 class procedure TUtilsGenericsRTTI<T>.Clone(AFromList, AToList: TObjectList<T>);
 var
-  RttiContext: TRttiContext;
-  RttiType: TRttiType;
   Fields: TRttiField;
-
-  oValue: TValue;
   AuxList: T;
 begin
 
   for AuxList in AFromList do
   begin
-    RttiType := RttiContext.GetType(AuxList.ClassType);
     AToList.Add(T.Create);
-    for Fields in RttiType.GetFields do
+    for Fields in TRttiContext.Create.GetType(AuxList.ClassType).GetFields do
     begin
-      oValue := Fields.GetValue(Pointer(AuxList));
-      Fields.SetValue(Pointer(AToList.Last), oValue);
+      Fields.SetValue(Pointer(AToList.Last), Fields.GetValue(Pointer(AuxList)));
     end;
+
   end;
 
 end;
