@@ -3,7 +3,7 @@ program Sample;
 uses
   Vcl.Forms,
   clone in 'clone.pas' {Form1},
-  Utils.GenericsRTTI in '..\Utils.GenericsRTTI.pas';
+  Utils.GenericsRTTI in '..\src\Utils.GenericsRTTI.pas';
 
 {$R *.res}
 
