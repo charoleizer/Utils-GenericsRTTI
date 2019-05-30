@@ -4,7 +4,11 @@ interface
 
 uses
   System.Generics.Collections,
-  RTTI;
+  RTTI,
+
+
+
+  Telegram.Notification;
 
 type
   TUtilsGenericsRTTI<T: class, constructor> = class(TEnumerable<T>)
@@ -44,11 +48,11 @@ end;
 
 class function TUtilsGenericsRTTI<T>.CreateObjectByClassType: T;
 var
-  ObjectType: TRttiType;
+  Tipo: TRttiType;
 begin
-  ObjectType := TRttiContext.Create.GetType(T.ClassInfo);
-  if ObjectType <> nil then
-    Result := ObjectType.AsInstance.GetMethod('Create').Invoke(ObjectType.AsInstance.MetaclassType, [nil]).AsType<T>;
+  Tipo := TRttiContext.Create.GetType(T.ClassInfo);
+  if Tipo <> nil then
+    Result := Tipo.AsInstance.GetMethod('Create').Invoke(TTelegramNotification, []).AsType<T>;
 end;
 
 { TUtilsRTTI }
@@ -57,12 +61,11 @@ end;
 
 class function TUtilsRTTI.CreateObjectByClassName(AClassName: String): TValue;
 var
-  ObjectType: TRttiType;
+  Tipo: TRttiType;
 begin
-  ObjectType := TRttiContext.Create.FindType(AClassName);
-  if ObjectType <> nil then
-    Result := ObjectType.AsInstance.GetMethod('Create').Invoke(ObjectType.AsInstance.MetaclassType, [nil]);
-
+  Tipo := TRttiContext.Create.FindType(AClassName);
+  if Tipo <> nil then
+    Result := Tipo.AsInstance.GetMethod('Create').Invoke(Tipo.AsInstance.MetaclassType, []);
 end;
 
 end.
