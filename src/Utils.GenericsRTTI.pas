@@ -45,11 +45,11 @@ end;
 
 class function TUtilsRTTI.CreateObjectByClassName(AClassName: String): TValue;
 var
-  Tipo: TRttiType;
+  ObjectType: TRttiType;
 begin
-  Tipo := TRttiContext.Create.FindType(AClassName);
-  if Tipo <> nil then
-    Result := Tipo.AsInstance.GetMethod('Create').Invoke(Tipo.AsInstance.MetaclassType, []);
+  ObjectType := TRttiContext.Create.FindType(AClassName);
+  if ObjectType <> nil then
+    Result := ObjectType.AsInstance.GetMethod('Create').Invoke(ObjectType.AsInstance.MetaclassType, []);
 end;
 
 end.
