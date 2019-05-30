@@ -9,7 +9,6 @@ uses
 type
   TUtilsGenericsRTTI<T: class, constructor> = class(TEnumerable<T>)
     class procedure Clone(AFromList, AToList: TObjectList<T>);
-    class function CreateObjectByClassType: T;
   end;
 
   TUtilsRTTI = class
@@ -41,18 +40,7 @@ begin
 end;
 
 
-
-class function TUtilsGenericsRTTI<T>.CreateObjectByClassType: T;
-var
-  Tipo: TRttiType;
-begin
-  Tipo := TRttiContext.Create.GetType(T.ClassInfo);
-  if Tipo <> nil then
-    Result := Tipo.AsInstance.GetMethod('Create').Invoke(T, []).AsType<T>;
-end;
-
 { TUtilsRTTI }
-
 
 
 class function TUtilsRTTI.CreateObjectByClassName(AClassName: String): TValue;
