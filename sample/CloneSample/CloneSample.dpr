@@ -1,9 +1,14 @@
-program Sample;
+program CloneSample;
 
 uses
+  madExcept,
+  madLinkDisAsm,
+  madListHardware,
+  madListProcesses,
+  madListModules,
   Vcl.Forms,
   clone in 'clone.pas' {Form1},
-  Utils.GenericsRTTI in '..\src\Utils.GenericsRTTI.pas';
+  Utils.GenericsRTTI in '..\..\src\Utils.GenericsRTTI.pas';
 
 {$R *.res}
 
